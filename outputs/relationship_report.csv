@@ -1,0 +1,10 @@
+Column,Appears In Tables
+amfi_code,"Fund Master, NAV History, Performance, Transactions, Holdings"
+fund_house,"Fund Master, AUM, Performance"
+scheme_name,"Fund Master, Performance"
+category,"Fund Master, Category, Performance"
+plan,"Fund Master, Performance"
+expense_ratio_pct,"Fund Master, Performance"
+date,"NAV History, AUM, Benchmark"
+aum_crore,"AUM, Performance"
+month,"SIP, Category, Folio"

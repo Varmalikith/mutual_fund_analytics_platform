@@ -1,0 +1,11 @@
+Dataset,Rows,Columns,Missing Values,Duplicate Rows
+Fund Master,40,15,0,0
+NAV History,46000,3,0,0
+AUM,90,5,0,0
+SIP,48,6,12,0
+Category,144,3,0,0
+Folio,21,6,0,0
+Performance,40,19,0,0
+Transactions,32778,13,0,0
+Holdings,322,8,0,0
+Benchmark,8050,3,0,0

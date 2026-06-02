@@ -1,0 +1,11 @@
+Dataset,Table Type
+Fund Master,Dimension
+NAV History,Fact
+AUM,Fact
+SIP Inflows,Fact
+Category Inflows,Fact
+Folio Count,Fact
+Scheme Performance,Fact
+Investor Transactions,Fact
+Portfolio Holdings,Fact
+Benchmark Indices,Fact
