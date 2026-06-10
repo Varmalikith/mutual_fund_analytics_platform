@@ -10,7 +10,7 @@ def get_fund_recommendations(risk_appetite, dataset_path):
     """
     # 1. Gracefully read the generated scorecard tracking tier
     if not Path(dataset_path).exists():
-        print(f"❌ Error: Database asset scorecard not found at {dataset_path}")
+        print(f" Error: Database asset scorecard not found at {dataset_path}")
         return None
         
     df_scorecard = pd.read_csv(dataset_path)
@@ -19,7 +19,7 @@ def get_fund_recommendations(risk_appetite, dataset_path):
     user_risk = str(risk_appetite).strip().capitalize()
     
     if user_risk not in ['Low', 'Moderate', 'High']:
-        print("❌ Error: Invalid risk profile input. Please choose 'Low', 'Moderate', or 'High'.")
+        print(" Error: Invalid risk profile input. Please choose 'Low', 'Moderate', or 'High'.")
         return None
 
     # 3. Handle data mapping filters safely depending on the asset risk columns present
@@ -49,7 +49,7 @@ def get_fund_recommendations(risk_appetite, dataset_path):
     sort_column = 'sharpe_ratio' if 'sharpe_ratio' in df_scorecard.columns else 'composite_score'
     
     if df_filtered.empty:
-        print(f"⚠️ Warning: No specific funds matching the exact rules for '{user_risk}' risk profile.")
+        print(f" Warning: No specific funds matching the exact rules for '{user_risk}' risk profile.")
         # Return top generic performers as emergency fallback
         df_recommendations = df_scorecard.sort_values(by=sort_column, ascending=False).head(3)
     else:
@@ -65,14 +65,14 @@ if __name__ == "__main__":
     # Check if a custom parameter was sent through terminal arguments
     profile_input = sys.argv[1] if len(sys.argv) > 1 else "Moderate"
     
-    print(f"\n🚀 --- BLUESTOCK AUTOMATED ADVISORY ENGINE ---")
+    print(f"\n --- BLUESTOCK AUTOMATED ADVISORY ENGINE ---")
     print(f"Evaluating optimal asset configurations for Risk Appetite: [{profile_input.upper()}]")
     
     # Run recommendation logic pipeline
     recommendations = get_fund_recommendations(profile_input, SCORECARD_FILE)
     
     if recommendations is not None and not recommendations.empty:
-        print("\n🎯 TOP 3 RECOMMENDED ASSETS GENERATED:")
+        print("\n TOP 3 RECOMMENDED ASSETS GENERATED:")
         cols_to_print = [c for c in ['amfi_code', 'scheme_name', 'category', 'sharpe_ratio', 'cagr_3yr'] if c in recommendations.columns]
         
         # Format printing structure dynamically
@@ -81,6 +81,6 @@ if __name__ == "__main__":
         if 'cagr_3yr' in cols_to_print: formatter_dict['cagr_3yr'] = '{:,.2%}'.format
             
         print(recommendations[cols_to_print].to_string(index=False, formatters=formatter_dict))
-        print(f"\n✅ Asset advisory routing matrix completed cleanly.")
+        print(f"\n Asset advisory routing matrix completed cleanly.")
     else:
-        print("❌ Could not generate recommendations. Check input variables or source files.")
+        print(" Could not generate recommendations. Check input variables or source files.")

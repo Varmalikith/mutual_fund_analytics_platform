@@ -16,9 +16,6 @@ DB_DIR.mkdir(parents=True, exist_ok=True)
 db_path = DB_DIR / "bluestock_mf.db"
 engine = create_engine(f"sqlite:///{db_path}")
 
-print("==================================================")
-print("⚙️ STARTING SQL DATABASE GENERATION PIPELINE")
-print("==================================================")   
 
 # 3. Read and execute schema.sql to build the tables first
 SCHEMA_FILE = SQL_DIR / "schema.sql"
@@ -34,13 +31,13 @@ if SCHEMA_FILE.exists():
             clean_statement = statement.strip()
             if clean_statement:
                 conn.execute(text(clean_statement))
-    print("✅ Success: All tables and optimization indexes built successfully!")
+    print(" All tables and optimization indexes built successfully!")
 else:
-    print("⚠️ Warning: schema.sql file not found. Pandas will infer table layouts instead.")
+    print(" Warning: schema.sql file not found. Pandas will infer table layouts instead.")
 
 print("\n==================================================")
-print("⏳ LOADING CLEAN DATASETS INTO SQL TABLES")
-print("==================================================")
+
+
 
 # 4. Define dictionary mapping table names to their clean CSV files
 # Note: For datasets we didn't clean in tasks 1-3, we load from raw safely.
@@ -67,8 +64,7 @@ for table_name, file_path in datasets_to_load.items():
         df.to_sql(table_name, engine, if_exists='append', index=False)
         print(f"   ✔ Loaded {len(df)} rows into '{table_name}'.")
     else:
-        print(f"❌ Error: File missing at path: {file_path}")
+        print(f" Error: File missing at path: {file_path}")
 
-print("==================================================")
-print(f"🏁 PIPELINE RUN COMPLETE! Database saved at: {db_path}")
-print("==================================================")
+
+print(f" PIPELINE RUN COMPLETE! Database saved at: {db_path}")

@@ -75,7 +75,7 @@ CREATE TABLE fact_scheme_performance (
     expense_ratio_pct REAL,
     morningstar_rating INTEGER,
     risk_grade TEXT,
-    is_negative_sharpe INTEGER, -- 👈 ADD THIS LINE HERE (1 for True, 0 for False)
+    is_negative_sharpe INTEGER, 
     FOREIGN KEY(amfi_code) REFERENCES dim_fund(amfi_code)
 );
 
